@@ -10,6 +10,9 @@ FROM ubuntu:latest
 #Maintainer and author
 MAINTAINER Magdalena Arnal <marnal@imim.es>
 
+#Avoid interactive post-install configuration steps
+ARG DEBIAN_FRONTEND=noninteractive
+
 #Install required packages in ubuntu for Sailfish
 RUN apt-get -y update
 RUN apt-get install --yes wget software-properties-common
@@ -34,7 +37,7 @@ RUN cd sailfish
 RUN mkdir build
 RUN cd build
 RUN CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0
-RUN make -f Makefile
+RUN make
 RUN make install
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
