@@ -34,7 +34,7 @@ RUN cd sailfish
 RUN mkdir build
 RUN cd build
 RUN CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0
-RUN make
+RUN make -f Makefile
 RUN make install
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
