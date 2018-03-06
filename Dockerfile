@@ -11,7 +11,7 @@ FROM ubuntu:latest
 MAINTAINER Magdalena Arnal <marnal@imim.es>
 
 #Install required packages in ubuntu for Sailfish
-RUN apt-get update
+RUN apt-get -y update
 RUN apt-get install --yes wget software-properties-common
 RUN add-apt-repository -y ppa:george-edison55/cmake-3.x
 RUN apt-get install -y \
@@ -33,7 +33,7 @@ RUN mkdir sailfish
 RUN cd sailfish
 RUN mkdir build
 RUN cd build
-RUN cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0
+RUN CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0
 RUN make
 RUN make install
 RUN apt-get clean
