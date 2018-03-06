@@ -24,7 +24,7 @@ RUN apt-get install -y \
     curl \
     unzip \
     autoconf
-RUN apt-get upgrade
+RUN apt-get -y upgrade
 
 #Download sailfish and make installation
 RUN wget -O sailfish.tar.gz https://github.com/kingsfordgroup/sailfish/archive/v0.10.0.tar.gz
