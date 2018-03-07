@@ -29,19 +29,18 @@ RUN apt-get -y update \
     && mkdir sailfish \
     && cd sailfish \
     && mkdir build \
-    && cd build \
-    && CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0\
-    && make \
-    && make install \
-    && apt-get clean \
-    && rm -r /var/lib/apt/lists/*
+    && cd build
+RUN CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0
+RUN make
+RUN make install
+RUN apt-get clean
+RUN rm -r /var/lib/apt/lists/*
 ENV PATH $PATH:/sailfish/bin
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/sailfish/lib
 
 #Chek if the installation was ok
 RUN echo $PATH
 RUN echo $LD_LIBRARY_PATH
-RUN make test
 
 WORKDIR /
 
