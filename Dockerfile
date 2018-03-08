@@ -6,12 +6,10 @@
 FROM ubuntu:latest
 
 #Author
-MAINTAINER Yukimitsu Yabuki, yukimitsu.yabuki@gmail.com
+MAINTAINER Magdalena Arnal <marnal@imim.es>
 
 #Install required packages
 ARG DEBIAN_FRONTEND=noninteractive
-
-#Install all required packages
 RUN apt-get -y update \
     && apt-get -y install wget \
     && apt-get -y install software-properties-common \
