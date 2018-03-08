@@ -10,6 +10,8 @@ MAINTAINER Yukimitsu Yabuki, yukimitsu.yabuki@gmail.com
 
 #Install required packages
 ARG DEBIAN_FRONTEND=noninteractive
+
+#Install all required packages
 RUN apt-get -y update \
     && apt-get -y install wget \
     && apt-get -y install software-properties-common \
@@ -23,24 +25,25 @@ RUN apt-get -y update \
     && apt-get -y install curl \
     && apt-get -y install unzip \
     && apt-get -y install autoconf \
-    && apt-get -y upgrade \
+    && apt-get -y upgrade
+    
+#Download and install sailfish
+RUN apt-get -y update \
     && wget -O sailfish.tar.gz https://github.com/kingsfordgroup/sailfish/archive/v0.10.0.tar.gz \
     && tar xvfz sailfish.tar.gz \
     && mkdir sailfish \
     && cd sailfish \
     && mkdir build \
-    && cd build
-RUN CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0
-RUN make
-RUN make install
-RUN apt-get clean
-RUN rm -r /var/lib/apt/lists/*
+    && cd build \
+    && CXX=g++ cmake -DBOOST_ROOT=/usr/local -DTBB_INSTALL_DIR=/usr/local -DCMAKE_INSTALL_PREFIX=/sailfish /sailfish-0.10.0\
+    && make \
+    && make install \
+    && apt-get clean \
+    && rm -r /var/lib/apt/lists/*
 ENV PATH $PATH:/sailfish/bin
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/sailfish/lib
 
-#Chek if the installation was ok
+#Check if the installation went Ok and set WD
 RUN echo $PATH
 RUN echo $LD_LIBRARY_PATH
-
 WORKDIR /
-
